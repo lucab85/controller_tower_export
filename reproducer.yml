@@ -1,17 +1,17 @@
 --- 
-- name: sync project from github webhook
+- name: print project list
   hosts: all
   vars:
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
   collections:
-    - ansible.tower
+    - ansible.controller
   tasks:
     - name: debug ansible_playbook_python
       debug:
         msg: "{{ ansible_playbook_python }}"
 
     - name: retrieve all projects from Tower
-      ansible.tower.tower_export:
+      ansible.controller.tower_export:
         all: true
         tower_host: "https://localhost"
         tower_username: "{{ lookup('env', 'TOWER_USERNAME') }}"
